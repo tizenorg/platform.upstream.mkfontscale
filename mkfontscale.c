@@ -19,7 +19,7 @@
   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
   THE SOFTWARE.
 */
-/* $XFree86: xc/programs/mkfontscale/mkfontscale.c,v 1.19 2003/11/23 05:40:36 dawes Exp $ */
+/* $XFree86: xc/programs/mkfontscale/mkfontscale.c,v 1.22 2003/12/19 02:05:39 dawes Exp $ */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -30,6 +30,7 @@
 #include <unistd.h>
 #include <errno.h>
 
+#include <X11/Xos.h>
 #include <X11/fonts/fontenc.h>
 #include <ft2build.h>
 #include FT_FREETYPE_H
@@ -44,6 +45,12 @@
 #include "hash.h"
 #include "data.h"
 #include "ident.h"
+
+#ifdef NEED_SNPRINTF
+#undef SCOPE
+#define SCOPE static
+#include "snprintf.c"
+#endif
 
 #define NPREFIX 1024
 
@@ -62,6 +69,7 @@ char *encodings_array[] =
       "iso8859-15", "iso8859-16",
       "ansi-1251", "koi8-r", "koi8-u", "koi8-ru", "koi8-e", "koi8-uni",
       "tis620-2",
+      "sun.unicode.india-0",
       "adobe-standard", "adobe-symbol",
       "ibm-cp437", "ibm-cp850", "ibm-cp852", "ibm-cp866", "microsoft-cp1252",
       /* But not "adobe-dingbats", as it uses generic glyph names. */
