@@ -30,6 +30,9 @@ AM_CONFIG_HEADER(config.h)
 AC_PROG_CC
 AC_PROG_INSTALL
 
+AC_CHECK_LIB(z, gzopen, [], 
+	[AC_MSG_ERROR([zlib is required, but was not found.])])
+
 # Checks for pkg-config packages
 PKG_CHECK_MODULES(DEP, fontenc freetype2)
 AC_SUBST(DEP_CFLAGS)
