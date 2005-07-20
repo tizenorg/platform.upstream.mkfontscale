@@ -34,8 +34,8 @@ AC_CHECK_LIB(z, gzopen, [],
 	[AC_MSG_ERROR([zlib is required, but was not found.])])
 
 # Checks for pkg-config packages
-PKG_CHECK_MODULES(DEP, fontenc freetype2)
-AC_SUBST(DEP_CFLAGS)
-AC_SUBST(DEP_LIBS)
+PKG_CHECK_MODULES(MKFONTSCALE, fontenc freetype2)
+AC_SUBST(MKFONTSCALE_CFLAGS)
+AC_SUBST(MKFONTSCALE_LIBS)
 
 AC_OUTPUT([Makefile])

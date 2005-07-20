@@ -21,8 +21,8 @@
 
 bin_PROGRAMS = mkfontscale
 
-mkfontscale_CFLAGS = @DEP_CFLAGS@
-mkfontscale_LDADD  = @DEP_LIBS@
+mkfontscale_CFLAGS = @MKFONTSCALE_CFLAGS@
+mkfontscale_LDADD  = @MKFONTSCALE_LIBS@
 
 mkfontscale_SOURCES = \
 	data.h \
