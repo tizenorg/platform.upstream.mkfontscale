@@ -21,7 +21,7 @@
 
 bin_PROGRAMS = mkfontscale
 
-mkfontscale_CFLAGS = @MKFONTSCALE_CFLAGS@
+mkfontscale_CFLAGS = @MKFONTSCALE_CFLAGS@ -D_BSD_SOURCE
 mkfontscale_LDADD  = @MKFONTSCALE_LIBS@
 
 mkfontscale_SOURCES = \
