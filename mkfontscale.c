@@ -800,7 +800,7 @@ doDirectory(char *dirname_given, int numEncodings, ListPtr encodingsToDo)
     if(fontscale_name == NULL)
         fontscale = stdout;
     else
-        fontscale = fopen(fontscale_name, "w");
+        fontscale = fopen(fontscale_name, "wb");
 
     if(fontscale == NULL) {
         fprintf(stderr, "%s: ", fontscale_name);
