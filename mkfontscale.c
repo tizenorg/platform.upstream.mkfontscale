@@ -444,6 +444,8 @@ t1Weight(char *weight)
         return "semibold";
     if(strcmp(weight, "DemiBold") == 0)
         return "semibold";
+    if(strcmp(weight, "SemiBold") == 0) /* some TeX fonts apparently do that */
+        return "semibold";
     else if(strcmp(weight, "Bold") == 0)
         return "bold";
     else if(strcmp(weight, "Black") == 0)
