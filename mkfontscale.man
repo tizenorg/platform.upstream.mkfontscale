@@ -149,7 +149,7 @@ is equivalent to
 .SH AUTHOR
 The version of
 .B mkfontscale
-included in this X.Org Foundataion release was originally written by
+included in this X.Org Foundation release was originally written by
 Juliusz Chroboczek <jch@freedesktop.org> for the XFree86 project.  The
 functionality of this program was inspired by the
 .B ttmkfdir
