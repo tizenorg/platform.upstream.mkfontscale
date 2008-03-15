@@ -30,6 +30,7 @@
 #include <dirent.h>
 #include <unistd.h>
 #include <errno.h>
+#include <ctype.h>
 
 #include <X11/Xos.h>
 #include <X11/fonts/fontenc.h>
