@@ -727,16 +727,24 @@ filePrio(char *filename)
     if(n < 4)
         return 0;
     if(strcmp(filename + n - 4, ".otf") == 0)
-        return 4;
+        return 6;
     if(strcmp(filename + n - 4, ".OTF") == 0)
-        return 4;
+        return 6;
     if(strcmp(filename + n - 4, ".ttf") == 0)
-        return 3;
+        return 5;
     if(strcmp(filename + n - 4, ".TTF") == 0)
-        return 3;
+        return 5;
+    if(strcmp(filename + n - 4, ".pcf") == 0)
+        return 4;
+    if(strcmp(filename + n - 4, ".PCF") == 0)
+        return 4;
     if(strcmp(filename + n - 3, ".gz") == 0)
-        return 2;
+        return 3;
     if(strcmp(filename + n - 2, ".Z") == 0)
+        return 2;
+    if(strcmp(filename + n - 4, ".bdf") == 0)
+        return 1;
+    if(strcmp(filename + n - 4, ".BDF") == 0)
         return 1;
     return 0;
 }
