@@ -41,6 +41,7 @@
 #include FT_TRUETYPE_IDS_H
 #include FT_TYPE1_TABLES_H
 #include FT_BDF_H
+#include FT_XFREE86_H
 
 #include "list.h"
 #include "hash.h"
@@ -848,8 +849,9 @@ doDirectory(char *dirname_given, int numEncodings, ListPtr encodingsToDo)
             isBitmap = ((face->face_flags & FT_FACE_FLAG_SCALABLE) == 0);
 
             if(!isBitmap) {
-                /* Workaround for bitmap-only TTF fonts */
-                if(face->num_fixed_sizes > 0) {
+                /* Workaround for bitmap-only SFNT fonts */
+                if(FT_IS_SFNT(face) && face->num_fixed_sizes > 0 &&
+                   strcmp(FT_Get_X11_Font_Format(face), "TrueType") == 0) {
                     TT_MaxProfile *maxp;
                     maxp = FT_Get_Sfnt_Table(face, ft_sfnt_maxp);
                     if(maxp != NULL && maxp->maxContours == 0)
