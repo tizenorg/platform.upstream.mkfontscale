@@ -41,7 +41,6 @@
 #include FT_TRUETYPE_IDS_H
 #include FT_TYPE1_TABLES_H
 #include FT_BDF_H
-#include FT_TRUETYPE_TABLES_H
 
 #include "list.h"
 #include "hash.h"
