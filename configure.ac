@@ -33,6 +33,16 @@ AC_PROG_INSTALL
 AC_CHECK_LIB(z, gzopen, [], 
 	[AC_MSG_ERROR([zlib is required, but was not found.])])
 
+AC_ARG_WITH(bzip2, 
+	AS_HELP_STRING([--with-bzip2], 
+			[Support bzip2 compressed bitmap fonts]),
+	[], [with_bzip2=no])
+if test "x$with_bzip2" = xyes; then
+	AC_CHECK_LIB(bz2, BZ2_bzopen, [],
+		AC_MSG_ERROR([*** libbz2 is required for bzip2 support]))
+	AC_DEFINE(X_BZIP2_FONT_COMPRESSION,1,[Support bzip2 for bitmap fonts])
+fi
+
 # Checks for pkg-config packages
 PKG_CHECK_MODULES(MKFONTSCALE, fontenc freetype2)
 AC_SUBST(MKFONTSCALE_CFLAGS)
