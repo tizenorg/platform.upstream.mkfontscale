@@ -21,7 +21,7 @@
 
 bin_PROGRAMS = mkfontscale
 
-mkfontscale_CFLAGS = @MKFONTSCALE_CFLAGS@ @X11_CFLAGS@ -D_BSD_SOURCE
+AM_CFLAGS = @MKFONTSCALE_CFLAGS@ @X11_CFLAGS@ -D_BSD_SOURCE $(CWARNFLAGS)
 mkfontscale_LDADD  = @MKFONTSCALE_LIBS@
 
 mkfontscale_SOURCES = \
@@ -67,12 +67,9 @@ SUFFIXES = .$(APP_MAN_SUFFIX) .man
 .man.$(APP_MAN_SUFFIX):
 	sed $(MAN_SUBSTS) < $< > $@
 
-EXTRA_DIST += ChangeLog
-MAINTAINERCLEANFILES = ChangeLog
-
 .PHONY: ChangeLog
 
 ChangeLog:
-	(GIT_DIR=$(top_srcdir)/.git git-log > .changelog.tmp && mv .changelog.tmp ChangeLog; rm -f .changelog.tmp) || (touch ChangeLog; echo 'git directory not found: installing possibly empty changelog.' >&2)
+	$(CHANGELOG_CMD)
 
 dist-hook: ChangeLog

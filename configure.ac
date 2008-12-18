@@ -27,7 +27,12 @@ AM_MAINTAINER_MODE
 
 AM_CONFIG_HEADER(config.h)
 
+# Require xorg-macros version >= 1.2.0 for XORG_CWARNFLAGS & XORG_CHANGELOG
+m4_ifndef([XORG_MACROS_VERSION], [AC_FATAL([must install xorg-macros 1.2 or later before running autoconf/autogen])])
+XORG_MACROS_VERSION(1.2)
+
 AC_PROG_CC
+XORG_CWARNFLAGS
 AC_PROG_INSTALL
 
 AC_CHECK_LIB(z, gzopen, [], 
@@ -53,5 +58,6 @@ AC_SUBST(X11_CFLAGS)
 
 XORG_MANPAGE_SECTIONS
 XORG_RELEASE_VERSION
+XORG_CHANGELOG
 
 AC_OUTPUT([Makefile])
