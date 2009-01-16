@@ -18,3 +18,7 @@ mkfontscale
 mkfontscale.1
 stamp-h1
 *~
+*.o
+mkfontscale-*.tar.*
+ChangeLog
+tags
