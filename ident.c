@@ -41,7 +41,6 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-/* $XFree86: xc/programs/mkfontscale/ident.c,v 1.3tsi Exp $ */
 
 /* The function identifyBitmap returns -1 if filename is definitively not
    a font file, 1 if it is a single-face bitmap font with a XLFD name,
