@@ -31,10 +31,6 @@ AM_CONFIG_HEADER(config.h)
 m4_ifndef([XORG_MACROS_VERSION],
 	  [m4_fatal([must install xorg-macros 1.8 or later before running autoconf/autogen])])
 XORG_MACROS_VERSION(1.8)
-
-AC_PROG_CC
-AC_PROG_INSTALL
-
 XORG_DEFAULT_OPTIONS
 
 AC_CHECK_LIB(z, gzopen, [], 
@@ -52,11 +48,7 @@ fi
 
 # Checks for pkg-config packages
 PKG_CHECK_MODULES(MKFONTSCALE, fontenc freetype2)
-AC_SUBST(MKFONTSCALE_CFLAGS)
-AC_SUBST(MKFONTSCALE_LIBS)
-
 PKG_CHECK_MODULES(X11, xproto)
-AC_SUBST(X11_CFLAGS)
 
 dnl Allow checking code with lint, sparse, etc.
 XORG_WITH_LINT
