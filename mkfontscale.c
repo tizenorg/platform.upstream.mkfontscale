@@ -46,12 +46,6 @@
 #include "data.h"
 #include "ident.h"
 
-#ifdef NEED_SNPRINTF
-#undef SCOPE
-#define SCOPE static
-#include "snprintf.c"
-#endif
-
 #define NPREFIX 1024
 
 #ifndef MAXFONTFILENAMELEN

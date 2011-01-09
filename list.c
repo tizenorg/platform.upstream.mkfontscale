@@ -26,12 +26,6 @@
 #include <string.h>
 #include "list.h"
 
-#ifdef NEED_SNPRINTF
-#undef SCOPE
-#define SCOPE static
-#include "snprintf.c"
-#endif
-
 int
 listMember(char *elt, ListPtr list)
 {
