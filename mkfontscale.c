@@ -61,6 +61,11 @@
 #define MAXFONTNAMELEN 1024
 #endif
 
+/* Two levels of macro calls are needed so that we stringify the value
+   of MAXFONT... and not the string "MAXFONT..." */
+#define QUOTE(x)	#x
+#define STRINGIFY(x)	QUOTE(x)
+
 static char *encodings_array[] =
     { "ascii-0",
       "iso8859-1", "iso8859-2", "iso8859-3", "iso8859-4", "iso8859-5",
@@ -681,10 +686,6 @@ readFontScale(HashTablePtr entries, char *dirname)
     FILE *in;
     int rc, count, i;
     char file[MAXFONTFILENAMELEN], font[MAXFONTNAMELEN];
-    char format[100];
-
-    snprintf(format, 100, "%%%ds %%%d[^\n]\n", 
-             MAXFONTFILENAMELEN, MAXFONTNAMELEN);
 
     if(dirname[n - 1] == '/')
         filename = dsprintf("%sfonts.scale", dirname);
@@ -709,7 +710,10 @@ readFontScale(HashTablePtr entries, char *dirname)
     }
 
     for(i = 0; i < count; i++) {
-        rc = fscanf(in, format, file, font);
+        rc = fscanf(in,
+		    "%" STRINGIFY(MAXFONTFILENAMELEN) "s "
+		    "%" STRINGIFY(MAXFONTNAMELEN) "[^\n]\n",
+		    file, font);
         if(rc != 2)
             break;
         putHash(entries, font, file, 100);
