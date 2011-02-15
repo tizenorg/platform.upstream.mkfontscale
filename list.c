@@ -217,6 +217,40 @@ reverseList(ListPtr old)
     return new;
 }
 
+/* qsort helper for sorting list entries */
+static int
+compareListEntries(const void *a, const void *b)
+{
+    const ListPtr lista = *(const ListPtr *) a;
+    const ListPtr listb = *(const ListPtr *) b;
+
+    return strcmp(lista->value, listb->value);
+}
+
+ListPtr
+sortList(ListPtr old)
+{
+    int i;
+    int l = listLength(old);
+    ListPtr n;
+    ListPtr *sorted = malloc(l * sizeof(ListPtr));
+
+    if (sorted == NULL)
+        return old;
+
+    for (n = old, i = 0; n != NULL; n = n->next) {
+        sorted[i++] = n;
+    }
+    qsort(sorted, i, sizeof(ListPtr), compareListEntries);
+    n = sorted[0];
+    for (i = 0; i < (l - 1); i++) {
+        sorted[i]->next = sorted[i+1];
+    }
+    sorted[i]->next = NULL;
+    free(sorted);
+    return n;
+}
+
 void
 destroyList(ListPtr old)
 {

@@ -39,6 +39,7 @@ int listLength(ListPtr list);
 ListPtr appendList(ListPtr first, ListPtr second);
 ListPtr makeList(char **a, int n, ListPtr old, int begin);
 ListPtr reverseList(ListPtr old);
+ListPtr sortList(ListPtr old);
 void destroyList(ListPtr old);
 void deepDestroyList(ListPtr old);
 

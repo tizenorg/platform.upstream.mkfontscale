@@ -978,6 +978,7 @@ doDirectory(char *dirname_given, int numEncodings, ListPtr encodingsToDo)
 	    exit(1);
 	}
         fprintf(encfile, "%d\n", numEncodings);
+        encodingsToDo = sortList(encodingsToDo);
         for(lp = encodingsToDo; lp; lp = lp->next) {
             fprintf(encfile, "%s\n", lp->value);
         }
