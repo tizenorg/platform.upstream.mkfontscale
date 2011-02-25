@@ -188,8 +188,10 @@ makeList(char **a, int n, ListPtr old, int begin)
     current = first;
     for(i = 1; i < n; i++) {
         next = malloc(sizeof(ListRec));
-        if(!next)
+        if(!next) {
+            destroyList(first);
             return NULL;
+        }
         next->value = a[i];
         next->next = NULL;
 
