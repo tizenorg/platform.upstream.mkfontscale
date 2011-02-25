@@ -679,7 +679,7 @@ readFontScale(HashTablePtr entries, char *dirname)
     char *filename;
     FILE *in;
     int rc, count, i;
-    char file[MAXFONTFILENAMELEN], font[MAXFONTNAMELEN];
+    char file[MAXFONTFILENAMELEN+1], font[MAXFONTNAMELEN+1];
 
     if(dirname[n - 1] == '/')
         filename = dsprintf("%sfonts.scale", dirname);
