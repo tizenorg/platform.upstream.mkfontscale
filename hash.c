@@ -173,7 +173,7 @@ hashArray(HashTablePtr table, int value_first)
 {
     int i, j, n;
     HashBucketPtr *dst;
-    
+
     n = hashElements(table);
     dst = malloc((n + 1) * sizeof(HashBucketPtr));
     if(dst == NULL)

@@ -84,7 +84,7 @@ dsprintf(const char *f, ...)
 	}
     }
 }
-    
+
 
 ListPtr
 listConsF(ListPtr cdr, const char *f, ...)
@@ -151,7 +151,7 @@ listLength(ListPtr list)
     return n;
 }
 
-ListPtr 
+ListPtr
 appendList(ListPtr first, ListPtr second)
 {
     ListPtr current;
