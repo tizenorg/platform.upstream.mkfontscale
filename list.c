@@ -27,7 +27,7 @@
 #include "list.h"
 
 int
-listMember(char *elt, ListPtr list)
+listMember(const char *elt, ListPtr list)
 {
     while(list != NULL) {
         if(strcmp(elt, list->value) == 0)
@@ -87,7 +87,7 @@ dsprintf(const char *f, ...)
     
 
 ListPtr
-listConsF(ListPtr cdr, char *f, ...)
+listConsF(ListPtr cdr, const char *f, ...)
 {
     va_list args;
     char *string;
@@ -114,7 +114,7 @@ listConsF(ListPtr cdr, char *f, ...)
 }
 
 ListPtr
-listAdjoinF(ListPtr cdr, char *f, ...)
+listAdjoinF(ListPtr cdr, const char *f, ...)
 {
     va_list args;
     char *string;

@@ -60,7 +60,7 @@
 #define QUOTE(x)	#x
 #define STRINGIFY(x)	QUOTE(x)
 
-static char *encodings_array[] =
+static const char *encodings_array[] =
     { "ascii-0",
       "iso8859-1", "iso8859-2", "iso8859-3", "iso8859-4", "iso8859-5",
       "iso8859-6", "iso8859-6.8", "iso8859-6.8x", "iso8859-6.16",
@@ -79,20 +79,20 @@ static char *encodings_array[] =
       "gb2312.1980-0", "gb18030.2000-0", "gb18030.2000-1",
       "ksc5601.1987-0", "ksc5601.1992-3"};
 
-static char *extra_encodings_array[] =
+static const char *extra_encodings_array[] =
     { "iso10646-1", "adobe-fontspecific", "microsoft-symbol" };
 
 static ListPtr encodings, extra_encodings;
-static char *outfilename;
+static const char *outfilename;
 
 #define countof(_a) (sizeof(_a)/sizeof((_a)[0]))
 
-static int doDirectory(char*, int, ListPtr);
+static int doDirectory(const char*, int, ListPtr);
 static int checkEncoding(FT_Face face, char *encoding_name);
 static int checkExtraEncoding(FT_Face face, char *encoding_name, int found);
 static int find_cmap(int type, int pid, int eid, FT_Face face);
-static char* notice_foundry(char *notice);
-static char* vendor_foundry(signed char *vendor);
+static const char* notice_foundry(const char *notice);
+static const char* vendor_foundry(const signed char *vendor);
 static int readFontScale(HashTablePtr entries, char *dirname);
 ListPtr makeXLFD(char *filename, FT_Face face, int);
 static int readEncodings(ListPtr encodings, char *dirname);
@@ -348,7 +348,7 @@ getName(FT_Face face, int nid)
     return NULL;
 }
 
-static char*
+static const char*
 os2Weight(int weight)
 {
     if(weight < 150)
@@ -371,7 +371,7 @@ os2Weight(int weight)
         return "black";
 }
 
-static char*
+static const char*
 os2Width(int width)
 {
     if(width <= 1)
@@ -394,15 +394,15 @@ os2Width(int width)
         return "ultraexpanded";
 }
 
-static char *widths[] = {
+static const char *widths[] = {
     "ultracondensed", "extracondensed", "condensed", "semicondensed",
     "normal", "semiexpanded", "expanded", "extraexpanded", "ultraexpanded" 
 };
 
 #define NUMWIDTHS (sizeof(widths) / sizeof(widths[0]))
 
-static char*
-nameWidth(char *name)
+static const char*
+nameWidth(const char *name)
 {
     char buf[500];
     int i;
@@ -419,8 +419,8 @@ nameWidth(char *name)
     return NULL;
 }
 
-static char*
-t1Weight(char *weight)
+static const char*
+t1Weight(const char *weight)
 {
     if(!weight)
         return NULL;
@@ -466,8 +466,8 @@ unsafe(char c)
         c == '[' || c == ']' || c == '(' || c == ')' || c == '\\' || c == '-';
 }
 
-static char *
-safe(char* s)
+static const char *
+safe(const char* s)
 {
     int i, len, safe_flag = 1;
     char *t;
@@ -502,7 +502,7 @@ ListPtr
 makeXLFD(char *filename, FT_Face face, int isBitmap)
 {
     ListPtr xlfd = NULL;
-    char *foundry, *family, *weight, *slant, *sWidth, *adstyle, 
+    const char *foundry, *family, *weight, *slant, *sWidth, *adstyle,
         *spacing, *full_name;
     TT_Header *head;
     TT_HoriHeader *hhea;
@@ -754,7 +754,7 @@ filePrio(char *filename)
 }
 
 static int
-doDirectory(char *dirname_given, int numEncodings, ListPtr encodingsToDo)
+doDirectory(const char *dirname_given, int numEncodings, ListPtr encodingsToDo)
 {
     char *dirname, *fontscale_name, *filename, *encdir;
     FILE *fontscale, *encfile;
@@ -1209,8 +1209,8 @@ checkExtraEncoding(FT_Face face, char *encoding_name, int found)
     }
 }
 
-static char*
-notice_foundry(char *notice)
+static const char*
+notice_foundry(const char *notice)
 {
     int i;
     for(i = 0; i < countof(notice_foundries); i++)
@@ -1220,7 +1220,7 @@ notice_foundry(char *notice)
 }
 
 static int
-vendor_match(signed char *vendor, char *vendor_string)
+vendor_match(const signed char *vendor, const char *vendor_string)
 {
     /* vendor is not necessarily NUL-terminated. */
     int i, len;
@@ -1233,8 +1233,8 @@ vendor_match(signed char *vendor, char *vendor_string)
     return 1;
 }
 
-static char*
-vendor_foundry(signed char *vendor)
+static const char*
+vendor_foundry(const signed char *vendor)
 {
     int i;
     for(i = 0; i < countof(vendor_foundries); i++)

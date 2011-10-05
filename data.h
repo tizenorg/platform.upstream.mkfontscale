@@ -26,7 +26,7 @@
 /* Order is significant.  For example, some B&H fonts are hinted by
    URW++, and both strings appear in the notice. */
 
-static char *notice_foundries[][2] =
+static const char *notice_foundries[][2] =
     {{"Bigelow", "b&h"},
      {"Adobe", "adobe"},
      {"Bitstream", "bitstream"},
@@ -49,7 +49,7 @@ static char *notice_foundries[][2] =
 /* It should not contain useless entries (such as UNKN) nor duplicate
    entries for padding both with spaces and NULs. */
 
-static char *vendor_foundries[][2] =
+static const char *vendor_foundries[][2] =
     {{"ADBE", "adobe"},
      {"AGFA", "agfa"},
      {"ALTS", "altsys"},
