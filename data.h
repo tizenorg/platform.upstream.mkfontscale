@@ -42,7 +42,9 @@ static const char *notice_foundries[][2] =
      {"Microsoft", "microsoft"},
      {"Omega", "omega"},
      {"Font21", "hwan"},
-     {"HanYang System", "hanyang"}};
+     {"HanYang System", "hanyang"},
+     {"Iorsh", "culmus"},
+     {"Gnat", "culmus"}};
 
 /* This table is partly taken from ttmkfdir by Joerg Pommnitz. */
 
@@ -59,6 +61,7 @@ static const char *vendor_foundries[][2] =
      {"B&H", "b&h"},
      {"BITS", "bitstream"},
      {"CANO", "cannon"},
+     {"CLM", "culmus"},
      {"DYNA", "dynalab"},
      {"EPSN", "epson"},
      {"FJ",  "fujitsu"},
