@@ -1,0 +1,57 @@
+Index: mkfontscale-1.0.6/mkfontscale.c
+===================================================================
+--- mkfontscale-1.0.6.orig/mkfontscale.c
++++ mkfontscale-1.0.6/mkfontscale.c
+@@ -27,6 +27,7 @@
+ #include <string.h>
+ 
+ #include <sys/types.h>
++#include <sys/stat.h>
+ #include <dirent.h>
+ #include <unistd.h>
+ #include <errno.h>
+@@ -826,6 +827,8 @@ doDirectory(char *dirname_given, int num
+     while((entry = readdir(dirp)) != NULL) {
+         int have_face = 0;
+         char *xlfd_name = NULL;
++        struct stat file_stat;
++        int ret = 0;
+         xlfd = NULL;
+ 
+ 	if (xl) {
+@@ -836,6 +839,35 @@ doDirectory(char *dirname_given, int num
+ 
+         filename = dsprintf("%s%s", dirname, entry->d_name);
+ 
++        /* check if file is a symbolic link*/
++        ret = lstat (filename, &file_stat);
++        if (!ret) {
++                if (S_ISLNK(file_stat.st_mode)) {
++                        
++                        /* Use realpath to get the absolute path
++                           by removing the ./ and ../ */
++                        
++                        char base_canon_fname[PATH_MAX] = {0,};                
++                        char *canon_fname = NULL, *canon_dirname = NULL;
++                        int base_strlen = 0; 
++                        
++                        canon_dirname = realpath (dirname, NULL);
++                        canon_fname = realpath (filename, NULL);
++                        /* skip broken symlinks (Novell Bug #529815) */
++                        if (!canon_fname) {
++                               continue;
++                        } 
++                        base_strlen = strlen (strrchr (canon_fname, '/'));
++                        
++                        strncpy (base_canon_fname, canon_fname, strlen(canon_fname) - base_strlen);
++                        
++                        /* skip the symbolic, if both the symlink and reference file
++                           are residing in the same directory */
++                        if (strcmp (base_canon_fname, canon_dirname) == 0)
++                                continue;
++                }
++        }
++
+         if(doBitmaps)
+             rc = bitmapIdentify(filename, &xlfd_name);
+         else
