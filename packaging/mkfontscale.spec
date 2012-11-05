@@ -19,7 +19,6 @@ legacy X11 font system.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %configure
