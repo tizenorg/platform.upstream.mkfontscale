@@ -25,6 +25,7 @@
 #include <string.h>
 
 #include <sys/types.h>
+#include <sys/stat.h>
 #include <dirent.h>
 #include <unistd.h>
 #include <errno.h>
@@ -826,6 +827,8 @@ doDirectory(const char *dirname_given, int numEncodings, ListPtr encodingsToDo)
     while((entry = readdir(dirp)) != NULL) {
         int have_face = 0;
         char *xlfd_name = NULL;
+        struct stat file_stat;
+        int ret = 0;
         xlfd = NULL;
 
 	if (xl) {
@@ -835,6 +838,35 @@ doDirectory(const char *dirname_given, int numEncodings, ListPtr encodingsToDo)
 	}
 
         filename = dsprintf("%s%s", dirname, entry->d_name);
+
+        /* check if file is a symbolic link*/
+        ret = lstat (filename, &file_stat);
+        if (!ret) {
+                if (S_ISLNK(file_stat.st_mode)) {
+                        
+                        /* Use realpath to get the absolute path
+                           by removing the ./ and ../ */
+                        
+                        char base_canon_fname[PATH_MAX] = {0,};                
+                        char *canon_fname = NULL, *canon_dirname = NULL;
+                        int base_strlen = 0; 
+                        
+                        canon_dirname = realpath (dirname, NULL);
+                        canon_fname = realpath (filename, NULL);
+                        /* skip broken symlinks (Novell Bug #529815) */
+                        if (!canon_fname) {
+                               continue;
+                        } 
+                        base_strlen = strlen (strrchr (canon_fname, '/'));
+                        
+                        strncpy (base_canon_fname, canon_fname, strlen(canon_fname) - base_strlen);
+                        
+                        /* skip the symbolic, if both the symlink and reference file
+                           are residing in the same directory */
+                        if (strcmp (base_canon_fname, canon_dirname) == 0)
+                                continue;
+                }
+        }
 
         if(doBitmaps)
             rc = bitmapIdentify(filename, &xlfd_name);
