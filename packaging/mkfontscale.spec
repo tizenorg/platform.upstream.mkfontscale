@@ -6,6 +6,7 @@ Summary:        Utility to create index of scalable font files for X
 Url:            http://xorg.freedesktop.org/
 Group:          System/X11/Utilities
 Source0:        http://xorg.freedesktop.org/releases/individual/app/%{name}-%{version}.tar.bz2
+Source1001: 	mkfontscale.manifest
 BuildRequires:  pkg-config
 BuildRequires:  zlib-devel
 BuildRequires:  pkgconfig(fontenc)
@@ -19,6 +20,7 @@ legacy X11 font system.
 
 %prep
 %setup -q
+cp %{SOURCE1001} .
 
 %build
 %configure
@@ -28,6 +30,7 @@ make %{?_smp_mflags}
 %make_install
 
 %files
+%manifest %{name}.manifest
 %defattr(-,root,root)
 %doc ChangeLog COPYING README
 %{_bindir}/mkfontscale
