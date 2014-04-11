@@ -1,5 +1,5 @@
 Name:           mkfontscale
-Version:        1.1.0
+Version:        1.1.1
 Release:        1
 License:        MIT
 Summary:        Utility to create index of scalable font files for X
