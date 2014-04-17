@@ -1,5 +1,5 @@
 Name:           mkfontscale
-Version:        1.1.0
+Version:        1.1.1
 Release:        1
 License:        MIT
 Summary:        Utility to create index of scalable font files for X
@@ -23,7 +23,7 @@ legacy X11 font system.
 cp %{SOURCE1001} .
 
 %build
-%configure
+%autogen
 make %{?_smp_mflags}
 
 %install
